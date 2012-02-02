@@ -1,9 +1,32 @@
 project(gradius)
 
-add_subdirectory(app)
-add_subdirectory(game)
-add_subdirectory(gfx)
-add_subdirectory(settings)
-add_subdirectory(world)
+find_package(SDL REQUIRED)
+find_package(SDL_image REQUIRED)
 
-add_executable(gradius app/App.cpp)
+link_libraries(	${SDL_LIBRARY}
+		${SDLIMAGE_LIBRARY}
+		SDLmain)
+
+set(
+	SOURCES
+	./app/Animation.cpp
+	./app/App.cpp
+	./app/App_LoadSettings.cpp
+	./app/App_OnCleanup.cpp
+	./app/App_OnEvent.cpp
+	./app/App_OnInit.cpp
+	./app/App_OnLoop.cpp
+	./app/App_OnRender.cpp
+	./app/Event.cpp
+	./app/FPS.cpp
+	./app/Surface.cpp
+	./game/Entity.cpp
+	./game/Player.cpp
+	./settings/Settings.cpp
+	./world/Camera.cpp
+	./world/Level.cpp
+	./world/Tile.cpp
+	./world/Zone.cpp
+)
+
+add_executable(gradius ${SOURCES})

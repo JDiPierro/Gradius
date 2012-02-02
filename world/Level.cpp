@@ -46,7 +46,7 @@ void Level::OnRender(SDL_Surface* Surf_Display, int MapX, int MapY)
 	{
 		for(int X = 0; X < Settings::SettingsControl.GetMapWidth(); X++)
 		{
-			if(TileList[ID] == Tile::TILE_TYPE_NONE)
+			if(TileList[ID].TypeID == Tile::TILE_TYPE_NONE)
 			{
 				ID++;
 				continue;
