@@ -3,7 +3,7 @@
 App::App()
 {
 	Running = true;
-	PATH_TO_SETTINGS = "./settings/settings.txt";
+	PATH_TO_SETTINGS = "settings.txt";
 }
 
 int App::OnExecute()

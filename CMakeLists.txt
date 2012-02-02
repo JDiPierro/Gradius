@@ -20,13 +20,19 @@ set(
 	./app/Event.cpp
 	./app/FPS.cpp
 	./app/Surface.cpp
+	
 	./game/Entity.cpp
 	./game/Player.cpp
+	
 	./settings/Settings.cpp
+	./settings/settings.txt
+	
 	./world/Camera.cpp
 	./world/Level.cpp
 	./world/Tile.cpp
 	./world/Zone.cpp
+	
+	./gfx/option.png
 )
 
 add_executable(gradius ${SOURCES})
