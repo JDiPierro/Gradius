@@ -1,0 +1,4 @@
+[Project]
+Name=Gradius
+Manager=KDevCMakeManager
+VersionControl=kdevgit
