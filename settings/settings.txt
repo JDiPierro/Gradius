@@ -1,0 +1,3 @@
+[Settings]
+WWIDTH=600
+WHEIGHT=600
