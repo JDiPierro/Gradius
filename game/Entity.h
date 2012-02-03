@@ -87,7 +87,7 @@ public:
 
 	virtual void OnAnimate();
 
-	virtual void OnCollision(Entity* Entity);
+	virtual bool OnCollision(Entity* Entity);
 
 public:
 	void OnMove(float MoveX, float MoveY);

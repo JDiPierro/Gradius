@@ -28,14 +28,13 @@ bool App::OnInit()
 	}
 
 /*
- * TEST SPRITE:
+ * TEST PLAYER:
  */
-	if((Surf_Test = Surface::OnLoad("./gfx/option.png")) == false)
+	if(Player1.OnLoad("./gfx/option.png",48,28,5) == false)
 	{
-		std::cout << "Option image load failed." << std::endl;
+		std::cout << "Player 1 init failed" << std::endl;
 		return false;
 	}
-	AnimOption.MaxFrames = 5;
 	AnimOption.Oscillate = false;
 	AnimOption.SetFrameRate(200);
 

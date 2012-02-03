@@ -1,4 +1,5 @@
 #include "Surface.h"
+#include <iostream>
 
 Surface::Surface()
 {
@@ -11,11 +12,13 @@ SDL_Surface* Surface::OnLoad(char* File)
 	SDL_Surface* Surf_Return = NULL;
 
 	if((Surf_Temp = IMG_Load(File)) == NULL)
+	{
+		std::cout << "Surface Load Failed" << std::endl;
 		return NULL;
+	}
 
 	Surf_Return = SDL_DisplayFormatAlpha(Surf_Temp);
 	SDL_FreeSurface(Surf_Temp);
-
 	return Surf_Return;
 }
 

@@ -7,8 +7,7 @@ link_libraries(	${SDL_LIBRARY}
 		${SDLIMAGE_LIBRARY}
 		SDLmain)
 
-set(
-	SOURCES
+set(SOURCES
 	./app/Animation.cpp
 	./app/App.cpp
 	./app/App_LoadSettings.cpp
@@ -22,6 +21,7 @@ set(
 	./app/Surface.cpp
 	
 	./game/Entity.cpp
+	./game/EntityCol.cpp
 	./game/Player.cpp
 	
 	./settings/Settings.cpp

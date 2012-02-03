@@ -22,6 +22,8 @@ private:
 	 * TESTS:
 	 */
 	SDL_Surface* 	Surf_Test;
+	Player Player1;
+	
 	Animation AnimOption;
 
 public:

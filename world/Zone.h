@@ -1,7 +1,8 @@
-#ifndef _CAREA_H_
-  #define _CAREA_H_
+#ifndef _LEVEL_H_
+  #define _LEVEL_H_
 
 #include "Level.h"
+#include "Tile.h"
 
 class Zone
 {

@@ -4,6 +4,7 @@
 #include <SDL/SDL.h>
 #include <vector>
 
+#include "Tile.h"
 #include "Zone.h"
 #include "../app/Surface.h"
 #include "../settings/Settings.h"
