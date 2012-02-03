@@ -2,6 +2,7 @@
 
 void App::OnRender()
 {
+	//Fills the screen with black to avoid ghosting.
 	SDL_FillRect(Surf_Display, NULL, SDL_MapRGB(Surf_Display->format, 0, 0, 0));
 	SDL_Rect Rect;
 	Rect.x = 0;
@@ -21,6 +22,14 @@ void App::OnRender()
 	 * TEST
 	 */
 	Surface::OnDraw(Surf_Display,Surf_Test,0,0,0,AnimOption.GetCurrentFrame() * 27,47,27);
+	
+	for(int i = 0; i < Entity::EntityList.size(); i++)
+	{
+	    if(!Entity::EntityList[i])
+		continue;
+	    Entity::EntityList[i]->OnRender(Surf_Display);
+	    std::cout << "rendering Entity" << std::endl;
+	}
 
 
 	SDL_Flip(Surf_Display);
