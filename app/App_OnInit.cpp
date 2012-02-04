@@ -26,7 +26,8 @@ bool App::OnInit()
 		std::cout << "Display Create Failed." << std::endl;
 		return false;
 	}
-
+	
+	SDL_EnableKeyRepeat(1, SDL_DEFAULT_REPEAT_INTERVAL / 3);
 /*
  * TEST PLAYER:
  */
@@ -41,9 +42,9 @@ bool App::OnInit()
 	{
 		std::cout << "Test Surface Fail" << std::endl;
 		return false;
-	}*/
+	}
 	AnimOption.Oscillate = false;
-	AnimOption.SetFrameRate(200);
+	AnimOption.SetFrameRate(200);*/
 
 
 

@@ -28,7 +28,6 @@ void App::OnRender()
 	    if(!Entity::EntityList[i])
 		continue;
 	    Entity::EntityList[i]->OnRender(Surf_Display);
-	    std::cout << "rendering Entity" << std::endl;
 	}
 
 
