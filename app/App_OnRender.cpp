@@ -21,7 +21,7 @@ void App::OnRender()
 	/*
 	 * TEST
 	 */
-	Surface::OnDraw(Surf_Display,Surf_Test,0,0,0,AnimOption.GetCurrentFrame() * 27,47,27);
+	//Surface::OnDraw(Surf_Display,Surf_Test,0,0,0,AnimOption.GetCurrentFrame() * 27,47,27);
 	
 	for(int i = 0; i < Entity::EntityList.size(); i++)
 	{
