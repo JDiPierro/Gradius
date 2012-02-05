@@ -64,8 +64,6 @@ public:
 protected:
 	float SpeedX;
 	float SpeedY;
-	float AccelX;
-	float AccelY;
 public:
 	int SpeedHack;
 	
@@ -101,13 +99,15 @@ public:
 
 	virtual bool OnCollision(Entity* Entity);
 
+	virtual void OnDeath();
+
 public:
 	void OnMove(float MoveX, float MoveY);
 
 	void StopMove();
 	
 public:
-	void OnFire();
+	virtual void OnFire();
 
 public:
 	bool Collides(int oX, int oY, int oW, int oH);

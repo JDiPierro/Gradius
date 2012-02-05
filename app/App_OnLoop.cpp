@@ -6,8 +6,17 @@ void App::OnLoop()
 	{
 	    if(!Entity::EntityList[i])
 		continue;
-	    Entity::EntityList[i]->OnLoop();
-	}//End For Loop
+	    if(Entity::EntityList[i]->Dead == true)
+	    {
+		Entity::EntityList[i]->OnDeath();
+		delete Entity::EntityList[i];
+		Entity::EntityList.erase(Entity::EntityList.begin()+i);
+	    }
+	    else
+	    {
+		Entity::EntityList[i]->OnLoop();
+	    }
+	}//End entity loops
 	
 	for(int i = 0; i < EntityCol::EntityColList.size(); i++)
 	{
@@ -20,9 +29,10 @@ void App::OnLoop()
 	    if(EntityA->OnCollision(EntityB))
 		EntityB->OnCollision(EntityA);
 	}//End Collision Events For Loop
+	
 	EntityCol::EntityColList.clear();
 	
-	FPS::FPSControl.OnLoop();	
+	FPS::FPSControl.OnLoop();
 	
 	char Buffer[255];
 	sprintf(Buffer, "%d", FPS::FPSControl.GetFPS());

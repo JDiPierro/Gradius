@@ -13,6 +13,7 @@ public:
     void OnRender(SDL_Surface* Surf_Display);
     void OnCleanup();
     void OnAnimate();
+    void OnFire();
     bool OnCollision(Entity* Entity);
 };
 

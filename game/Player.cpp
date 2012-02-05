@@ -16,6 +16,23 @@ bool Player::OnLoad(char* File, int Width, int Height, int MaxFrames)
     return true;
 }
 
+void Player::OnFire()
+{
+    if(lastFireTime + 300 < SDL_GetTicks())
+    {
+	lastFireTime = SDL_GetTicks();
+	Entity* bullet = new Entity();
+	bullet->OnLoad("./gfx/playerBullet.png",4,4,0) == false;
+	bullet->Type = ENTITY_TYPE_BULLET;
+	bullet->X = this->X + this->Width + 1;
+	bullet->Y = this->Y + 12;
+	
+	bullet->MoveRight = true;
+	
+	Entity::EntityList.push_back(bullet);
+    }
+}
+
 void Player::OnLoop()
 {
     Entity::OnLoop();

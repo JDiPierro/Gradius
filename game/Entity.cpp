@@ -34,9 +34,6 @@ Entity::Entity()
 	SpeedX = 0;
 	SpeedY = 0;
 
-	AccelX = 0;
-	AccelY = 0;
-
 	MaxSpeedX = 0;
 	MaxSpeedY = 0;
 
@@ -111,13 +108,6 @@ void Entity::OnLoop()
 	SpeedX *= FPS::FPSControl.GetSpeedFactor();
 	SpeedY *= FPS::FPSControl.GetSpeedFactor();
 
-	//This next block will be deleted soon:
-	//TODO: Implement standard speed w/ upgrades
-	/*if(SpeedX > MaxSpeedX)  SpeedX =  MaxSpeedX;
-	if(SpeedX < -MaxSpeedX) SpeedX = -MaxSpeedX;
-	if(SpeedY > MaxSpeedY)  SpeedY =  MaxSpeedY;
-	if(SpeedY < -MaxSpeedY) SpeedY = -MaxSpeedY;*/
-
 	OnAnimate();
 	OnMove(SpeedX, SpeedY);
 }
@@ -131,6 +121,12 @@ void Entity::OnRender(SDL_Surface* Surf_Display)
 	}
 	Surface::OnDraw(Surf_Display,Surf_Entity,X,Y,0,Anim_Control.GetCurrentFrame() * Height,Width,Height);
 }
+
+void Entity::OnDeath()
+{
+    OnCleanup();
+}
+
 
 void Entity::OnCleanup()
 {
@@ -148,7 +144,7 @@ void Entity::OnAnimate()
 
 bool Entity::OnCollision(Entity* Entity)
 {
-    //
+    
 }
 
 void Entity::OnMove(float MoveX, float MoveY)
@@ -234,8 +230,8 @@ void Entity::OnFire()
 	Entity* bullet = new Entity();
 	bullet->OnLoad("./gfx/playerBullet.png",4,4,0) == false;
 	bullet->Type = ENTITY_TYPE_BULLET;
-	bullet->X = this->X + this->Width + 10;
-	bullet->Y = this->Y + 13;
+	bullet->X = this->X + this->Width + 1;
+	bullet->Y = this->Y + 12;
 	
 	bullet->MoveRight = true;
 	
@@ -245,37 +241,33 @@ void Entity::OnFire()
 
 bool Entity::Collides(int oX, int oY, int oW, int oH)
 {
-    if(Type != ENTITY_TYPE_BULLET)
-    {
-	int left1, left2;
-	int right1, right2;
-	int top1, top2;
-	int bottom1, bottom2;
+    int left1, left2;
+    int right1, right2;
+    int top1, top2;
+    int bottom1, bottom2;
 
-	int tX = (int)X + Col_X;
-	int tY = (int)Y + Col_Y;
+    int tX = (int)X + Col_X;
+    int tY = (int)Y + Col_Y;
 
-	left1 = tX;
-	left2 = oX;
+    left1 = tX;
+    left2 = oX;
 
-	right1 = left1 + Width -1 - Col_Width;
-	right2 = oX + oW -1;
+    right1 = left1 + Width -1 - Col_Width;
+    right2 = oX + oW -1;
 
-	top1 = tY;
-	top2 = oY;
+    top1 = tY;
+    top2 = oY;
 
-	bottom1 = top1 + Height - 1 - Col_Height;
-	bottom2 = oY + oH -1;
+    bottom1 = top1 + Height - 1 - Col_Height;
+    bottom2 = oY + oH -1;
 
-	if (bottom1 < top2) return false;
-	if (top1 > bottom2) return false;
+    if (bottom1 < top2) return false;
+    if (top1 > bottom2) return false;
 
-	if (right1 < left2) return false;
-	if (left1 > right2) return false;
+    if (right1 < left2) return false;
+    if (left1 > right2) return false;
 
-	return true;
-    }
-    return false;
+    return true;
 }
 
 bool Entity::PosValid(int NewX, int NewY)
@@ -324,6 +316,10 @@ bool Entity::PosValid(int NewX, int NewY)
 	   NewX > Settings::SettingsControl.GetWinWidth() - Width ||
 	   NewY > Settings::SettingsControl.GetWinHeight() - Height)
 	{
+	    if(Type == ENTITY_TYPE_BULLET)
+	    {
+		Dead = true;
+	    }
 	    Return = false;
 	}
 
