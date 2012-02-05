@@ -24,6 +24,7 @@ set(SOURCES
 	./game/EntityCol.cpp
 	./game/Player.cpp
 	./game/Bullet.cpp
+	./game/Powerup.cpp
 	
 	./settings/Settings.cpp
 	./settings/settings.txt

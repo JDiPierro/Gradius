@@ -1,4 +1,5 @@
 #include "App.h"
+#include "../game/Powerup.h" //TODO: FOR DEBUG ONLY. Remove later
 
 void App::OnEvent(SDL_Event* Event)
 {
@@ -82,4 +83,9 @@ void App::OnKeyUp(SDLKey sym, SDLMod mod, Uint16 unicode)
 		break;
 	    }
 	}
+}
+
+void App::OnLButtonDown(int mX, int mY)
+{
+    Powerup* pUp = new Powerup(mX,mY);
 }

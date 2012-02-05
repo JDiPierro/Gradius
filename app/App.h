@@ -10,6 +10,7 @@
 #include "../world/Camera.h"
 //#include "../game/Entity.h"
 #include "../game/Player.h"
+#include "../game/Powerup.h"
 //#include "../game/Bullet.h"
 #include "../settings/Settings.h"
 
@@ -43,6 +44,7 @@ public:
 		void OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode);
 		void OnKeyUp(SDLKey sym, SDLMod mod, Uint16 unicode);
 		void OnExit();
+		void OnLButtonDown(int mX, int mY);
 
 	void OnLoop();
 

@@ -4,7 +4,7 @@
 
 Player::Player()
 {
-    //
+    powerUps = 0;
 }
 
 bool Player::OnLoad(char* File, int Width, int Height, int MaxFrames)
@@ -30,8 +30,7 @@ void Player::OnFire()
 	    Bullet* bullet = new Bullet();
 	    bullet->OnLoad(this,4,4,0,X + Width + 1,Y + 12) == false;
 	    
-	    Entity::EntityList.push_back(bullet);
-	    numBullets ++;
+	    numBullets++;
 	}
     }
 }

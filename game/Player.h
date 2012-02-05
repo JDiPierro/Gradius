@@ -3,7 +3,10 @@
 
 #include "Entity.h"
 
-class Player : public Entity{
+class Player : public Entity
+{
+public:
+    int powerUps;
 public:
     Player();
     

@@ -94,11 +94,11 @@ void Entity::OnLoop()
 	if(MoveLeft)
 		SpeedX = -Speed*SpeedHack;
 	else if(MoveRight)
-		SpeedX = Speed*SpeedHack;
+		SpeedX =  Speed*SpeedHack;
 	if(MoveUp)
 		SpeedY = -Speed*SpeedHack;
 	else if(MoveDown)
-		SpeedY = Speed*SpeedHack;
+		SpeedY =  Speed*SpeedHack;
 	if(Firing)
 	    OnFire();
 	
@@ -191,8 +191,6 @@ void Entity::OnFire()
 	bullet->Y = this->Y + 12;
 	
 	bullet->MoveRight = true;
-	
-	Entity::EntityList.push_back(bullet);
     }
 }
 
