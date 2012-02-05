@@ -52,9 +52,6 @@ public:
 	int numBullets;
 	Uint32 lastFireTime;
 
-private:
-    	Entity* parent;
-
 public:
 	int Type;
 
@@ -64,6 +61,7 @@ public:
 protected:
 	float SpeedX;
 	float SpeedY;
+	float Speed;
 public:
 	int SpeedHack;
 	

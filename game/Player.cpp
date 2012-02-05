@@ -1,5 +1,6 @@
 #include "Player.h"
 #include <iostream>
+#include "Bullet.h"
 
 Player::Player()
 {
@@ -13,23 +14,24 @@ bool Player::OnLoad(char* File, int Width, int Height, int MaxFrames)
 	std::cout << "Player 1 Entity Load Failed" << std::endl;
 	return false;
     }
+    Speed = 25;
+    Type = ENTITY_TYPE_PLAYER;
     return true;
 }
 
 void Player::OnFire()
 {
-    if(lastFireTime + 300 < SDL_GetTicks())
+    if(lastFireTime + 150 < SDL_GetTicks())
     {
-	lastFireTime = SDL_GetTicks();
-	Entity* bullet = new Entity();
-	bullet->OnLoad("./gfx/playerBullet.png",4,4,0) == false;
-	bullet->Type = ENTITY_TYPE_BULLET;
-	bullet->X = this->X + this->Width + 1;
-	bullet->Y = this->Y + 12;
-	
-	bullet->MoveRight = true;
-	
-	Entity::EntityList.push_back(bullet);
+	if(numBullets < 2)
+	{
+	    lastFireTime = SDL_GetTicks();
+	    Bullet* bullet = new Bullet();
+	    bullet->OnLoad(this,4,4,0,X + Width + 1,Y + 12) == false;
+	    
+	    Entity::EntityList.push_back(bullet);
+	    numBullets ++;
+	}
     }
 }
 

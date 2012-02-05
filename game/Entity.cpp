@@ -31,6 +31,7 @@ Entity::Entity()
 	Flags = ENTITY_FLAG_NONE;
 
 	SpeedHack = 1;
+	Speed = 1;
 	SpeedX = 0;
 	SpeedY = 0;
 
@@ -94,13 +95,13 @@ void Entity::OnLoop()
 	//Speed control.
 	//TODO: Implement variables for speed upgrades.
 	if(MoveLeft)
-		SpeedX = -1*SpeedHack;
+		SpeedX = -Speed*SpeedHack;
 	else if(MoveRight)
-		SpeedX = 1*SpeedHack;
+		SpeedX = Speed*SpeedHack;
 	if(MoveUp)
-		SpeedY = -1*SpeedHack;
+		SpeedY = -Speed*SpeedHack;
 	else if(MoveDown)
-		SpeedY = 1*SpeedHack;
+		SpeedY = Speed*SpeedHack;
 	if(Firing)
 	    OnFire();
 	

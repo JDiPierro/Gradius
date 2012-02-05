@@ -41,7 +41,7 @@ void App::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode)
 	    }
 	    case SDLK_LCTRL:
 	    {
-		Player1.SpeedHack = 20;
+		Player1.SpeedHack = 3;
 		break;
 	    }
 	}

@@ -23,6 +23,7 @@ set(SOURCES
 	./game/Entity.cpp
 	./game/EntityCol.cpp
 	./game/Player.cpp
+	./game/Bullet.cpp
 	
 	./settings/Settings.cpp
 	./settings/settings.txt

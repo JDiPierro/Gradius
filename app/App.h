@@ -10,6 +10,7 @@
 #include "../world/Camera.h"
 //#include "../game/Entity.h"
 #include "../game/Player.h"
+//#include "../game/Bullet.h"
 #include "../settings/Settings.h"
 
 class App : public Event
