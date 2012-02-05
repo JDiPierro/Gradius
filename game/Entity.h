@@ -14,7 +14,7 @@ class Entity
 public:
 	enum
 	{
-		ENTITY_TYPE_NONE = 0,
+		ENTITY_TYPE_NONE = 0, //Should never be used. If an entity has this type something is very wrong.
 		ENTITY_TYPE_GENERIC,
 		ENTITY_TYPE_PLAYER,
 		ENTITY_TYPE_BULLET
@@ -35,13 +35,14 @@ protected:
 	Animation Anim_Control;
 	SDL_Surface* Surf_Entity;
 
-public:
+protected:
 	float X;
 	float Y;
 
 	int Width;
 	int Height;
 
+public:
 	bool MoveLeft;
 	bool MoveRight;
 	bool MoveUp;
@@ -50,6 +51,7 @@ public:
 public:
 	bool Firing;
 	int numBullets;
+protected:
 	Uint32 lastFireTime;
 
 public:
@@ -64,10 +66,6 @@ protected:
 	float Speed;
 public:
 	int SpeedHack;
-	
-public:
-	float MaxSpeedX;
-	float MaxSpeedY;
 
 protected:
 	int CurrFrameCol;

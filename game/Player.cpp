@@ -14,6 +14,7 @@ bool Player::OnLoad(char* File, int Width, int Height, int MaxFrames)
 	std::cout << "Player 1 Entity Load Failed" << std::endl;
 	return false;
     }
+    
     Speed = 25;
     Type = ENTITY_TYPE_PLAYER;
     return true;

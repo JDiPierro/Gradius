@@ -35,9 +35,6 @@ Entity::Entity()
 	SpeedX = 0;
 	SpeedY = 0;
 
-	MaxSpeedX = 0;
-	MaxSpeedY = 0;
-
 	CurrFrameCol = 0;
 	CurrFrameRow = 0;
 
@@ -153,67 +150,26 @@ void Entity::OnMove(float MoveX, float MoveY)
 	if(MoveX == 0 && MoveY == 0)
 		return;
 
-	double NewX = 0;
-	double NewY = 0;
-
 	MoveX *= FPS::FPSControl.GetSpeedFactor();
 	MoveY *= FPS::FPSControl.GetSpeedFactor();
 
-	if(MoveX != 0)
+	if(Flags & ENTITY_FLAG_GHOST)
 	{
-		if(MoveX >= 0)
-			NewX =  FPS::FPSControl.GetSpeedFactor();
-		else
-			NewX = -FPS::FPSControl.GetSpeedFactor();
+		PosValid((int)(X + MoveX), (int)(Y + MoveY));
+		
+		X += MoveX;
+		Y += MoveY;
 	}
-	if(MoveY != 0)
+	else
 	{
-		if(MoveY >= 0)
-			NewY = FPS::FPSControl.GetSpeedFactor();
+		if(PosValid((int)(X + MoveX), (int)(Y)))
+			X += MoveX;
 		else
-			NewY = -FPS::FPSControl.GetSpeedFactor();
-	}
-	while(true)
-	{
-		if(Flags & ENTITY_FLAG_GHOST)
-		{
-			PosValid((int)(X + NewX), (int)(Y + NewY));
-			
-			X += NewX;
-			Y += NewY;
-		}
+			SpeedX = 0;
+		if(PosValid((int)(X), (int)(Y + MoveY)))
+			Y += MoveY;
 		else
-		{
-			if(PosValid((int)(X + NewX), (int)(Y)))
-				X += NewX;
-			else
-				SpeedX = 0;
-			if(PosValid((int)(X), (int)(Y + NewY)))
-				Y += NewY;
-			else
-				SpeedY = 0;
-		}
-
-		MoveX += -NewX;
-		MoveY += -NewY;
-
-		if(NewX > 0 && MoveX <= 0)
-			NewX = 0;
-		if(NewX < 0 && MoveX >= 0)
-			NewX = 0;
-
-		if(NewY > 0 && MoveY <= 0)
-			NewY = 0;
-		if(NewY < 0 && MoveY >= 0)
-			NewY = 0;
-
-		if(MoveX == 0)
-			NewX = 0;
-		if(MoveY == 0)
-			NewY = 0;
-
-		if(MoveX == 0 && MoveY 	== 0) 	break;
-		if(NewX  == 0 && NewY 	== 0) 	break;
+			SpeedY = 0;
 	}
 }
 
