@@ -13,6 +13,7 @@ FPS::FPS() {
 
 	Frames      = 0;
 	NumFrames   = 0;
+	
 }
 
 //=============================================================================
@@ -29,7 +30,7 @@ void FPS::OnLoop() {
 
 	LastTime = SDL_GetTicks();
 
-	Frames++;
+	Frames++;	
 }
 
 int FPS::GetFPS() {

@@ -3,8 +3,8 @@
 void App::OnCleanup()
 {
 
-	if(Surf_Test != NULL)
-		SDL_FreeSurface(Surf_Test);
+	if(Surf_Bullet != NULL)
+		SDL_FreeSurface(Surf_Bullet);
 	
 	for(int i = i; i < Entity::EntityList.size(); i++)
 	{

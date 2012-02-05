@@ -28,6 +28,7 @@ bool App::OnInit()
 	}
 	
 	SDL_EnableKeyRepeat(1, SDL_DEFAULT_REPEAT_INTERVAL / 3);
+	
 /*
  * TEST PLAYER:
  */
@@ -37,15 +38,6 @@ bool App::OnInit()
 		return false;
 	}
 	Entity::EntityList.push_back(&Player1);
-	
-	/*if((Surf_Test = Surface::OnLoad("./gfx/option.png")) == NULL)
-	{
-		std::cout << "Test Surface Fail" << std::endl;
-		return false;
-	}
-	AnimOption.MaxFrames = 5;
-	AnimOption.Oscillate = false;
-	AnimOption.SetFrameRate(200);*/
 
 
 

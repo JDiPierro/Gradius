@@ -16,7 +16,8 @@ public:
 	{
 		ENTITY_TYPE_NONE = 0,
 		ENTITY_TYPE_GENERIC,
-		ENTITY_TYPE_PLAYER
+		ENTITY_TYPE_PLAYER,
+		ENTITY_TYPE_BULLET
 	};
 
 	enum
@@ -46,7 +47,13 @@ public:
 	bool MoveUp;
 	bool MoveDown;
 	
+public:
 	bool Firing;
+	int numBullets;
+	Uint32 lastFireTime;
+
+private:
+    	Entity* parent;
 
 public:
 	int Type;
@@ -80,6 +87,7 @@ public:
 
 public:
 	virtual bool OnLoad(char* File, int Width, int Height, int MaxFrames);
+	virtual bool OnLoad(SDL_Surface* Surface, int Width, int Height, int MaxFrames);
 
 	virtual void OnLoop();
 

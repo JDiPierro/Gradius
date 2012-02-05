@@ -22,9 +22,10 @@ void App::OnLoop()
 	}//End Collision Events For Loop
 	EntityCol::EntityColList.clear();
 	
-	FPS::FPSControl.OnLoop();
+	FPS::FPSControl.OnLoop();	
 	
 	char Buffer[255];
 	sprintf(Buffer, "%d", FPS::FPSControl.GetFPS());
 	SDL_WM_SetCaption(Buffer, Buffer);
+	SDL_Delay(1);
 }

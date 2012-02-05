@@ -9,8 +9,8 @@ public:
 	static FPS FPSControl;
 
 private:
-	int		OldTime;
-	int		LastTime;
+	int	OldTime;
+	int	LastTime;
 
 	float	SpeedFactor;
 
