@@ -36,7 +36,7 @@ void App::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode)
 	    }
 	    case SDLK_SPACE:
 	    {
-		Player1.OnFire();
+		Player1.Firing = true;
 		break;
 	    }
 	}
@@ -68,7 +68,7 @@ void App::OnKeyUp(SDLKey sym, SDLMod mod, Uint16 unicode)
 	    }
 	    case SDLK_SPACE:
 	    {
-		//Player1.Firing = false;
+		Player1.Firing = false;
 		break;
 	    }
 	}
