@@ -30,14 +30,6 @@ bool Powerup::OnCollision(Entity* Entity)
     return true;
 }
 
-bool Powerup::OnCollision(Player* Player)
-{
-    Player->powerUps++;
-    Dead = true;
-    Entity::OnCleanup();
-    return true;
-}
-
 void Powerup::OnRender(SDL_Surface* Surf_Display)
 {
     Entity::OnRender(Surf_Display);

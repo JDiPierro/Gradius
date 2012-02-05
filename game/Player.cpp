@@ -26,11 +26,13 @@ void Player::OnFire()
     {
 	if(numBullets < 2)
 	{
+	    if(numBullets < 0)
+	    {
+		std::cout << "NumBullets less than 0" << std::endl;
+	    }
 	    lastFireTime = SDL_GetTicks();
 	    Bullet* bullet = new Bullet();
 	    bullet->OnLoad(this,4,4,0,X + Width + 1,Y + 12) == false;
-	    
-	    numBullets++;
 	}
     }
 }

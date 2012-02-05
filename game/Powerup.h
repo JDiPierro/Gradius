@@ -15,7 +15,6 @@ public:
     void OnRender(SDL_Surface* Surf_Display);
     
     bool OnCollision(Entity* Entity);
-    bool OnCollision(Player* Player);
     
 };
 

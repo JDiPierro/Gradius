@@ -13,6 +13,7 @@ bool Bullet::OnLoad(Entity* inParent, int Width, int Height, int MaxFrames, int 
 	return false;
     else if(parent->Type == ENTITY_TYPE_PLAYER)
     {
+	parent->numBullets++;
 	if(Entity::OnLoad("./gfx/playerBullet.png", Width, Height, MaxFrames) == false)
 	{
 	    std::cout << "Bullet Load Failed" << std::endl;
@@ -64,6 +65,10 @@ void Bullet::OnCleanup()
 }
 
 bool Bullet::OnCollision(Entity* Entity)
-{
+{    
+    Dead = true;
+    
+    Entity::OnCleanup();
+    
     return true;
 }
