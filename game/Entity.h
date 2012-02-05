@@ -45,6 +45,8 @@ public:
 	bool MoveRight;
 	bool MoveUp;
 	bool MoveDown;
+	
+	bool Firing;
 
 public:
 	int Type;
@@ -93,6 +95,9 @@ public:
 	void OnMove(float MoveX, float MoveY);
 
 	void StopMove();
+	
+public:
+	void OnFire();
 
 public:
 	bool Collides(int oX, int oY, int oW, int oH);
