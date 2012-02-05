@@ -30,6 +30,7 @@ Entity::Entity()
 
 	Flags = ENTITY_FLAG_NONE;
 
+	SpeedHack = 1;
 	SpeedX = 0;
 	SpeedY = 0;
 
@@ -96,15 +97,16 @@ void Entity::OnLoop()
 	//Speed control.
 	//TODO: Implement variables for speed upgrades.
 	if(MoveLeft)
-		SpeedX = -1;
+		SpeedX = -1*SpeedHack;
 	else if(MoveRight)
-		SpeedX = 1;
+		SpeedX = 1*SpeedHack;
 	if(MoveUp)
-		SpeedY = -1;
+		SpeedY = -1*SpeedHack;
 	else if(MoveDown)
-		SpeedY = 1;
+		SpeedY = 1*SpeedHack;
 	if(Firing)
 	    OnFire();
+	
 
 	SpeedX *= FPS::FPSControl.GetSpeedFactor();
 	SpeedY *= FPS::FPSControl.GetSpeedFactor();
@@ -146,7 +148,7 @@ void Entity::OnAnimate()
 
 bool Entity::OnCollision(Entity* Entity)
 {
-	
+    //
 }
 
 void Entity::OnMove(float MoveX, float MoveY)
@@ -179,13 +181,13 @@ void Entity::OnMove(float MoveX, float MoveY)
 		if(Flags & ENTITY_FLAG_GHOST)
 		{
 			PosValid((int)(X + NewX), (int)(Y + NewY));
-
+			
 			X += NewX;
 			Y += NewY;
 		}
 		else
 		{
-			if(PosValid((int)(X + NewX), (int)(Y + NewY)))
+			if(PosValid((int)(X + NewX), (int)(Y)))
 				X += NewX;
 			else
 				SpeedX = 0;
@@ -230,7 +232,7 @@ void Entity::OnFire()
     {
 	lastFireTime = SDL_GetTicks();
 	Entity* bullet = new Entity();
-	bullet->OnLoad("./gfx/playerBullet.png",47,27,0) == false;
+	bullet->OnLoad("./gfx/playerBullet.png",4,4,0) == false;
 	bullet->Type = ENTITY_TYPE_BULLET;
 	bullet->X = this->X + this->Width + 10;
 	bullet->Y = this->Y + 13;
@@ -254,7 +256,7 @@ bool Entity::Collides(int oX, int oY, int oW, int oH)
 	int tY = (int)Y + Col_Y;
 
 	left1 = tX;
-	left2 = tY;
+	left2 = oX;
 
 	right1 = left1 + Width -1 - Col_Width;
 	right2 = oX + oW -1;
@@ -315,6 +317,14 @@ bool Entity::PosValid(int NewX, int NewY)
 				Return = false;
 			}
 		}
+	}
+	
+	//TODO: Use the camera to determine this.
+	if(NewX < 0 || NewY < 0 ||
+	   NewX > Settings::SettingsControl.GetWinWidth() - Width ||
+	   NewY > Settings::SettingsControl.GetWinHeight() - Height)
+	{
+	    Return = false;
 	}
 
 	return Return;

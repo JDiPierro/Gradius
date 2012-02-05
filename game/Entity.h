@@ -66,7 +66,9 @@ protected:
 	float SpeedY;
 	float AccelX;
 	float AccelY;
-
+public:
+	int SpeedHack;
+	
 public:
 	float MaxSpeedX;
 	float MaxSpeedY;

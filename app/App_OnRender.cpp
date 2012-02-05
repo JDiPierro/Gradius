@@ -3,7 +3,7 @@
 void App::OnRender()
 {
 	//Fills the screen with black to avoid ghosting.
-	SDL_FillRect(Surf_Display, NULL, SDL_MapRGB(Surf_Display->format, 0, 0, 0));
+	//SDL_FillRect(Surf_Display, NULL, SDL_MapRGB(Surf_Display->format, 0, 0, 0));
 	SDL_Rect Rect;
 	Rect.x = 0;
 	Rect.y = 0;
