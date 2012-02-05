@@ -1,15 +1,9 @@
 #include "Entity.h"
+#include <iostream>
+#include "../app/App.h"
 
 
 std::vector<Entity*> Entity::EntityList;
-
-std::vector<EntityCol> EntityCol::EntityColList;
-
-EntityCol::EntityCol()
-{
-	EntityA = NULL;
-	EntityB = NULL;
-}
 
 Entity::Entity()
 {
@@ -23,8 +17,12 @@ Entity::Entity()
 
 	MoveLeft 	= false;
 	MoveRight	= false;
-	MoveUp	= false;
+	MoveUp		= false;
 	MoveDown	= false;
+	
+	Firing		= false;
+	numBullets	= 0;
+	lastFireTime	= 0;
 
 	Type = ENTITY_TYPE_GENERIC;
 
@@ -60,10 +58,24 @@ bool Entity::OnLoad(char* File, int Width, int Height, int MaxFrames)
 {
 	if((Surf_Entity = Surface::OnLoad(File)) == NULL)
 	{
+		std::cout << "Entity Surface Failure" << std::endl;
 		return false;
 	}
 
-	Surface::Transparent(Surf_Entity, 255, 0, 255);
+	//Surface::Transparent(Surf_Entity, 255, 0, 255);
+
+	this->Width = Width;
+	this->Height = Height;
+
+	Anim_Control.MaxFrames = MaxFrames;
+
+	return true;
+}
+
+bool Entity::OnLoad(SDL_Surface* Surface, int Width, int Height, int MaxFrames)
+{
+	Surf_Entity = Surface;
+	//Surface::Transparent(Surf_Entity, 255, 0, 255);
 
 	this->Width = Width;
 	this->Height = Height;
@@ -84,23 +96,25 @@ void Entity::OnLoop()
 	//Speed control.
 	//TODO: Implement variables for speed upgrades.
 	if(MoveLeft)
-		AccelX = -0.5;
+		SpeedX = -1;
 	else if(MoveRight)
-		AccelX = 0.5;
+		SpeedX = 1;
 	if(MoveUp)
-		AccelY = -0.5;
+		SpeedY = -1;
 	else if(MoveDown)
-		AccelY = 0.5;
+		SpeedY = 1;
+	if(Firing)
+	    OnFire();
 
-	SpeedX += AccelX * FPS::FPSControl.GetSpeedFactor();
-	SpeedY += AccelY * FPS::FPSControl.GetSpeedFactor();
+	SpeedX *= FPS::FPSControl.GetSpeedFactor();
+	SpeedY *= FPS::FPSControl.GetSpeedFactor();
 
 	//This next block will be deleted soon:
 	//TODO: Implement standard speed w/ upgrades
-	if(SpeedX > MaxSpeedX)  SpeedX =  MaxSpeedX;
+	/*if(SpeedX > MaxSpeedX)  SpeedX =  MaxSpeedX;
 	if(SpeedX < -MaxSpeedX) SpeedX = -MaxSpeedX;
 	if(SpeedY > MaxSpeedY)  SpeedY =  MaxSpeedY;
-	if(SpeedY < -MaxSpeedY) SpeedY = -MaxSpeedY;
+	if(SpeedY < -MaxSpeedY) SpeedY = -MaxSpeedY;*/
 
 	OnAnimate();
 	OnMove(SpeedX, SpeedY);
@@ -110,17 +124,10 @@ void Entity::OnRender(SDL_Surface* Surf_Display)
 {
 	if(Surf_Entity == NULL || Surf_Display == NULL)
 	{
+		std::cout << "Entity Render Error" << std::endl;
 		return;
 	}
-
-	Surface::OnDraw(	Surf_Display,					//Surface to Draw to
-					Surf_Entity,					//Surface to Draw
-					X - Camera::CameraControl.GetX(),	//X to draw at
-					Y - Camera::CameraControl.GetY(),	//Y to draw at
-					CurrFrameCol * Width,			//Width of Sprite crop
-					(CurrFrameRow + Anim_Control.GetCurrentFrame()) * Height,	//Height of sprite crop
-					Width,						//Width of Sprite
-					Height);						//Height of Sprite
+	Surface::OnDraw(Surf_Display,Surf_Entity,X,Y,0,Anim_Control.GetCurrentFrame() * Height,Width,Height);
 }
 
 void Entity::OnCleanup()
@@ -137,9 +144,9 @@ void Entity::OnAnimate()
 	Anim_Control.OnAnimate();
 }
 
-void Entity::OnCollision(Entity* Entity)
+bool Entity::OnCollision(Entity* Entity)
 {
-	//
+	
 }
 
 void Entity::OnMove(float MoveX, float MoveY)
@@ -213,21 +220,31 @@ void Entity::OnMove(float MoveX, float MoveY)
 
 void Entity::StopMove()
 {
-	if(SpeedX > 0)
-		AccelX = -1;
+	SpeedX = 0;
+	SpeedY = 0;
+}
 
-	if(SpeedX < 0)
-		AccelX = 1;
-
-	if(SpeedX < 2.0f && SpeedX > -2.0f)
-	{
-		AccelX = 0;
-		SpeedX = 0;
-	}
+void Entity::OnFire()
+{
+    if(lastFireTime + 300 < SDL_GetTicks())
+    {
+	lastFireTime = SDL_GetTicks();
+	Entity* bullet = new Entity();
+	bullet->OnLoad("./gfx/playerBullet.png",47,27,0) == false;
+	bullet->Type = ENTITY_TYPE_BULLET;
+	bullet->X = this->X + this->Width + 10;
+	bullet->Y = this->Y + 13;
+	
+	bullet->MoveRight = true;
+	
+	Entity::EntityList.push_back(bullet);
+    }
 }
 
 bool Entity::Collides(int oX, int oY, int oW, int oH)
 {
+    if(Type != ENTITY_TYPE_BULLET)
+    {
 	int left1, left2;
 	int right1, right2;
 	int top1, top2;
@@ -255,6 +272,8 @@ bool Entity::Collides(int oX, int oY, int oW, int oH)
 	if (left1 > right2) return false;
 
 	return true;
+    }
+    return false;
 }
 
 bool Entity::PosValid(int NewX, int NewY)
@@ -315,10 +334,10 @@ bool Entity::PosValidTile(Tile* Tile)
 bool Entity::PosValidEntity(Entity* Entity, int NewX, int NewY)
 {
 	if(this != Entity &&
-			Entity != NULL &&
-			Entity->Dead == false &&
-			(Entity->Flags ^ ENTITY_FLAG_MAPONLY) &&
-			Entity->Collides(NewX + Col_X,NewY + Col_Y, Width - Col_Width - 1, Height - Col_Height - 1) == true)
+		Entity != NULL &&
+		Entity->Dead == false &&
+	       (Entity->Flags ^ ENTITY_FLAG_MAPONLY) &&
+		Entity->Collides(NewX + Col_X,NewY + Col_Y, Width - Col_Width - 1, Height - Col_Height - 1) == true)
 	{
 		EntityCol EntityCol;
 
