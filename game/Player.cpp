@@ -1,6 +1,7 @@
 #include "Player.h"
 #include <iostream>
 #include "Bullet.h"
+#include <math.h>
 
 Player::Player()
 {
@@ -17,7 +18,7 @@ bool Player::OnLoad(char* File, int Width, int Height, int MaxFrames)
 	return false;
     }
     
-    Speed = 12;
+    Speed = 15; //base: 15 //1: 25 //2:40
     Type = ENTITY_TYPE_PLAYER;
     return true;
 }
@@ -99,7 +100,6 @@ void Player::usePowerup()
 	    //TODO:Figure out specials O,o
 	}
     }
-    powerUps = PUP_NONE;
 }
 
 
@@ -127,3 +127,34 @@ bool Player::OnCollision(Entity* Entity)
 {
     return true;
 }
+
+void Player::Upgrade_Speed()
+{
+    Speed = Speed + (speedLevel * 5) +5;
+    powerUps = PUP_NONE;
+}
+void Player::Upgrade_Gun()
+{
+
+}
+void Player::Option_Spread()
+{
+
+}
+void Player::Upgrade_Lasers()
+{
+
+}
+void Player::Upgrade_Missiles()
+{
+
+}
+void Player::Upgrade_Option()
+{
+
+}
+void Player::Upgrade_Shields()
+{
+
+}
+

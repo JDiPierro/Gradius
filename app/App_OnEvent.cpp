@@ -42,7 +42,7 @@ void App::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode)
 	    }
 	    case SDLK_LCTRL:
 	    {
-		Player1.SpeedHack = 3;
+		Player1.usePowerup();
 		break;
 	    }
 	}
@@ -79,7 +79,6 @@ void App::OnKeyUp(SDLKey sym, SDLMod mod, Uint16 unicode)
 	    }
 	    case SDLK_LCTRL:
 	    {
-		Player1.SpeedHack= 1;
 		break;
 	    }
 	}

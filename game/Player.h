@@ -56,6 +56,7 @@ public:
 private:
     void GetPowerup();
     
+public:
     void usePowerup();
     
 private:
