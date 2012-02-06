@@ -5,6 +5,8 @@
 Player::Player()
 {
     powerUps = 0;
+    speedLevel = 1;
+    numOptions = 0;
 }
 
 bool Player::OnLoad(char* File, int Width, int Height, int MaxFrames)
@@ -15,7 +17,7 @@ bool Player::OnLoad(char* File, int Width, int Height, int MaxFrames)
 	return false;
     }
     
-    Speed = 25;
+    Speed = 12;
     Type = ENTITY_TYPE_PLAYER;
     return true;
 }
@@ -39,8 +41,65 @@ void Player::OnFire()
 
 void Player::GetPowerup()
 {
-    powerUps++;
+    if(powerUps < 7)
+	powerUps++;
+    else
+	powerUps = 1;
     std::cout << "Powerup total: " << powerUps << std::endl;
+}
+
+void Player::usePowerup()
+{
+    switch(powerUps)
+    {
+	case PUP_SPEED:
+	{
+	    if(speedLevel < 6)
+	    {
+		Upgrade_Speed();
+	    }
+	    break;
+	}
+	case PUP_MISSILES:
+	{
+	    if(!(activated ^ POWERUP_FLAG_MISSILES))
+		Upgrade_Missiles();
+	    break;
+	}
+	case PUP_GUNUP:
+	{
+	    Upgrade_Gun();
+	    break;
+	}
+	case PUP_LASERS:
+	{
+	    Upgrade_Lasers();
+	    break;
+	}
+	case PUP_OPTION:
+	{
+	    if(numOptions < 4)
+	    {
+		Upgrade_Option();
+	    }
+	    else
+		Option_Spread();
+	    break;
+	}
+	case PUP_SHIELD:
+	{
+	    if(activated ^ POWERUP_FLAG_SHIELDS)
+		break;
+	    else
+		Upgrade_Shields();
+	    break;
+	}
+	case PUP_SPECIAL:
+	{
+	    //TODO:Figure out specials O,o
+	}
+    }
+    powerUps = PUP_NONE;
 }
 
 
