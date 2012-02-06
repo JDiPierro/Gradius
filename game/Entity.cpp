@@ -300,24 +300,39 @@ bool Entity::PosValidTile(Tile* Tile)
 
 bool Entity::PosValidEntity(Entity* Entity, int NewX, int NewY)
 {
+    bool Return = true;
 	if(this != Entity &&
 		Entity != NULL &&
 		Entity->Dead == false &&
 	       (Entity->Flags ^ ENTITY_FLAG_MAPONLY) &&
 		Entity->Collides(NewX + Col_X,NewY + Col_Y, Width - Col_Width - 1, Height - Col_Height - 1) == true)
 	{
-		EntityCol EntityCol;
-
-
+	    EntityCol EntityCol;
+	    if(Entity->Type == ENTITY_TYPE_POWERUP)
+	    {
+		if(Type == ENTITY_TYPE_PLAYER)
+		{
+		    EntityCol.EntityA = this;
+		    EntityCol.EntityB = Entity;
+		    Return = false;
+		}
+		else
+		{
+		    EntityCol.EntityA = NULL;
+		    EntityCol.EntityB = NULL;
+		    Return = true;
+		}
+	    }
+	    else
+	    {
 		EntityCol.EntityA = this;
 		EntityCol.EntityB = Entity;
-
-
-		EntityCol::EntityColList.push_back(EntityCol);
-
-		return false;
+		Return = false;
+	    }
+	    
+	    EntityCol::EntityColList.push_back(EntityCol);
 	}
-
-	return true;
+	
+	return Return;
 }
 

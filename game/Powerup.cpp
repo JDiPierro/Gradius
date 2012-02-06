@@ -14,7 +14,7 @@ bool Powerup::OnLoad(int X, int Y)
 	return false;
     }
 
-    Flags = ENTITY_FLAG_GHOST;
+    Type = ENTITY_TYPE_POWERUP;
     
     this->X = X;
     this->Y = Y;

@@ -17,7 +17,8 @@ public:
 		ENTITY_TYPE_NONE = 0, //Should never be used. If an entity has this type something is very wrong.
 		ENTITY_TYPE_GENERIC,
 		ENTITY_TYPE_PLAYER,
-		ENTITY_TYPE_BULLET
+		ENTITY_TYPE_BULLET,
+		ENTITY_TYPE_POWERUP
 	};
 
 	enum
@@ -25,7 +26,7 @@ public:
 		ENTITY_FLAG_NONE 	= 0,
 
 		ENTITY_FLAG_GHOST	= 0x00000001,
-		ENTITY_FLAG_MAPONLY	= 0x00000002
+		ENTITY_FLAG_MAPONLY	= 0x00000002,
 	};
 
 public:
