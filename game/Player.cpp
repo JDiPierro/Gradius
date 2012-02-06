@@ -37,6 +37,13 @@ void Player::OnFire()
     }
 }
 
+void Player::GetPowerup()
+{
+    powerUps++;
+    std::cout << "Powerup total: " << powerUps << std::endl;
+}
+
+
 void Player::OnLoop()
 {
     Entity::OnLoop();

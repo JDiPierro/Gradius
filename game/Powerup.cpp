@@ -14,6 +14,8 @@ bool Powerup::OnLoad(int X, int Y)
 	return false;
     }
 
+    Flags = ENTITY_FLAG_GHOST;
+    
     this->X = X;
     this->Y = Y;
     
@@ -27,6 +29,12 @@ bool Powerup::OnLoad(int X, int Y)
 
 bool Powerup::OnCollision(Entity* Entity)
 {
+    if(Entity->Type == ENTITY_TYPE_PLAYER)
+    {
+	Entity->GetPowerup();
+	Dead = true;
+	Entity::OnCleanup();
+    }
     return true;
 }
 

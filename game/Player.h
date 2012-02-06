@@ -18,6 +18,7 @@ public:
     void OnAnimate();
     void OnFire();
     bool OnCollision(Entity* Entity);
+    void GetPowerup();
 };
 
 #endif // PLAYER_H

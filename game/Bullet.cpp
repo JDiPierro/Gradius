@@ -66,9 +66,6 @@ void Bullet::OnCleanup()
 
 bool Bullet::OnCollision(Entity* Entity)
 {    
-    Dead = true;
-    
-    Entity::OnCleanup();
-    
+    Dead = true;    
     return true;
 }

@@ -94,6 +94,8 @@ public:
 	virtual void OnAnimate();
 
 	virtual bool OnCollision(Entity* Entity);
+	
+	virtual void GetPowerup();
 
 	virtual void OnDeath();
 

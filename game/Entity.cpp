@@ -194,6 +194,12 @@ void Entity::OnFire()
     }
 }
 
+void Entity::GetPowerup()
+{
+
+}
+
+
 bool Entity::Collides(int oX, int oY, int oW, int oH)
 {
     int left1, left2;
