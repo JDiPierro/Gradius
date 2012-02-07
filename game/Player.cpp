@@ -1,7 +1,7 @@
 #include "Player.h"
 #include <iostream>
 #include "Bullet.h"
-#include <math.h>
+//#include <math.h> //Unused right now. May use a logarithmic function for speed upgrades.
 
 Player::Player()
 {
@@ -17,7 +17,7 @@ bool Player::OnLoad(char* File, int Width, int Height, int MaxFrames)
 	std::cout << "Player 1 Entity Load Failed" << std::endl;
 	return false;
     }
-    
+    Entity::EntityList.push_back(this);
     Speed = 15; //base: 15 //1: 25 //2:40
     Type = ENTITY_TYPE_PLAYER;
     return true;
@@ -99,7 +99,8 @@ void Player::usePowerup()
 	{
 	    //TODO:Figure out specials O,o
 	}
-    }
+    }//end switch
+    std::cout << "Remaining Powerups: " << powerUps << std::endl;
 }
 
 

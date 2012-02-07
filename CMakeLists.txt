@@ -2,9 +2,11 @@ project(gradius)
 
 find_package(SDL REQUIRED)
 find_package(SDL_image REQUIRED)
+find_package(SDL_ttf REQUIRED)
 
 link_libraries(	${SDL_LIBRARY}
 		${SDLIMAGE_LIBRARY}
+		${SDLTTF_LIBRARY}
 		SDLmain)
 
 set(SOURCES

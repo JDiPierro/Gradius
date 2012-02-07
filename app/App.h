@@ -2,6 +2,7 @@
 	#define _APP_H_
 
 #include <SDL/SDL.h>
+#include <SDL/SDL_ttf.h>
 #include <iostream>					//For debugging.
 
 #include "Event.h"
@@ -28,6 +29,9 @@ private:
 	Animation AnimOption;
 private:
 	SDL_Surface* Surf_Bullet;
+	
+public:
+	TTF_Font* Font;
 
 public:
 	App();

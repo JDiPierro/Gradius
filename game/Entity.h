@@ -25,8 +25,13 @@ public:
 	{
 		ENTITY_FLAG_NONE 	= 0,
 
-		ENTITY_FLAG_GHOST	= 0x00000001,
-		ENTITY_FLAG_MAPONLY	= 0x00000002,
+		ENTITY_FLAG_GHOST	= 0x01,
+		ENTITY_FLAG_MAPONLY	= 0x02,
+					//0x04
+					//0x08
+					//0x10 =16
+					//0x20 =32
+					//0x40 =64
 	};
 
 public:

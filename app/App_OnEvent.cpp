@@ -8,44 +8,45 @@ void App::OnEvent(SDL_Event* Event)
 
 void App::OnExit()
 {
-	Running = false;
+    //Exits the main game loop
+    Running = false;
 }
 
 void App::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode)
 {
-	switch(sym)
+    switch(sym)
+    {
+	case SDLK_LEFT:
 	{
-	    case SDLK_LEFT:
-	    {
-		Player1.MoveLeft = true;
-		break;
-	    }
-	    case SDLK_RIGHT:
-	    {
-		Player1.MoveRight = true;
-		break;
-	    }
-	    case SDLK_UP:
-	    {
-		Player1.MoveUp = true;
-		break;
-	    }
-	    case SDLK_DOWN:
-	    {
-		Player1.MoveDown = true;
-		break;
-	    }
-	    case SDLK_SPACE:
-	    {
-		Player1.Firing = true;
-		break;
-	    }
-	    case SDLK_LCTRL:
-	    {
-		Player1.usePowerup();
-		break;
-	    }
+	    Player1.MoveLeft = true;
+	    break;
 	}
+	case SDLK_RIGHT:
+	{
+	    Player1.MoveRight = true;
+	    break;
+	}
+	case SDLK_UP:
+	{
+	    Player1.MoveUp = true;
+	    break;
+	}
+	case SDLK_DOWN:
+	{
+	    Player1.MoveDown = true;
+	    break;
+	}
+	case SDLK_SPACE:
+	{
+	    Player1.Firing = true;
+	    break;
+	}
+	case SDLK_LCTRL:
+	{
+	    Player1.usePowerup();
+	    break;
+	}
+    }
 }
 
 void App::OnKeyUp(SDLKey sym, SDLMod mod, Uint16 unicode)

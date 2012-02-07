@@ -12,13 +12,17 @@ Animation::Animation()
 }
 
 void Animation::OnAnimate() {
+    //Check to see if enough ticks have passed to render another frame
+    //
+    //Ticks are milliseconds since the process started.
     if(OldTime + FrameRate > SDL_GetTicks())
     {
         return;
     }
-
+    //The new old time is the current time.
     OldTime = SDL_GetTicks();
-
+    
+    //Increment the current frame.
     CurrentFrame += FrameInc;
 
     if(Oscillate)
