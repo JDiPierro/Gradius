@@ -11,21 +11,15 @@ void App::OnRender()
 	Rect.h = Settings::SettingsControl.GetWinHeight();
 
 	SDL_FillRect(Surf_Display, &Rect, 0);
-
-	//SDL_Surface* Surf_Dest, SDL_Surface* Surf_Src, int X, int Y, int cropX, int cropY, int W, int H)
-
-	/*
-	 * TEST
-	 */
-	//Surface::OnDraw(Surf_Display,Surf_Test,0,0,0,AnimOption.GetCurrentFrame() * 27,47,27);
 	
+	//Render each entity to the Display.
 	for(int i = 0; i < Entity::EntityList.size(); i++)
 	{
 	    if(!Entity::EntityList[i])
 		continue;
 	    Entity::EntityList[i]->OnRender(Surf_Display);
 	}
-
-
+	
+	//Flip the renders from the Buffer to the Display.
 	SDL_Flip(Surf_Display);
 }

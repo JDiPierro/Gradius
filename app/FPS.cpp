@@ -1,10 +1,7 @@
-//=============================================================================
 #include "FPS.h"
 
-//=============================================================================
 FPS FPS::FPSControl;
 
-//=============================================================================
 FPS::FPS() {
 	OldTime     = 0;
 	LastTime    = 0;
@@ -16,30 +13,30 @@ FPS::FPS() {
 	
 }
 
-//=============================================================================
 void FPS::OnLoop() {
-	if(OldTime + 1000 < SDL_GetTicks()) {
-		OldTime = SDL_GetTicks();
+	//More than a second has passed since the last FPS update
+	if(OldTime + 1000 < SDL_GetTicks())
+	{
+	    OldTime = SDL_GetTicks();
 
-		NumFrames = Frames;
+	    //The FPS is the number of frames that rendered in the last loop.
+	    NumFrames = Frames;
 
-		Frames = 0;
+	    //Start counting frames from 0 again.
+	    Frames = 0;
 	}
-
+	//Controls how fast the game runs. TODO: Change the 32.0f to a user-controlled TARGET_FRAMERATE setting.
 	SpeedFactor = ((SDL_GetTicks() - LastTime) / 1000.0f) * 32.0f;
-
+	
 	LastTime = SDL_GetTicks();
 
-	Frames++;	
+	Frames++;
 }
 
 int FPS::GetFPS() {
     return NumFrames;
 }
 
-//------------------------------------------------------------------------------
 float FPS::GetSpeedFactor() {
     return SpeedFactor;
 }
-
-//==============================================================================

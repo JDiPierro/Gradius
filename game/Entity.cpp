@@ -153,7 +153,7 @@ void Entity::OnMove(float MoveX, float MoveY)
 	MoveX *= FPS::FPSControl.GetSpeedFactor();
 	MoveY *= FPS::FPSControl.GetSpeedFactor();
 
-	if(Flags & ENTITY_FLAG_GHOST)
+	if(Flags & ENTITY_FLAG_GHOST) // & is bitwise AND operator, so check to see if entity IS a ghost.
 	{
 		PosValid((int)(X + MoveX), (int)(Y + MoveY));
 		
@@ -304,7 +304,7 @@ bool Entity::PosValidEntity(Entity* Entity, int NewX, int NewY)
 	if(this != Entity &&
 		Entity != NULL &&
 		Entity->Dead == false &&
-	       (Entity->Flags ^ ENTITY_FLAG_MAPONLY) &&
+	       (Entity->Flags ^ ENTITY_FLAG_MAPONLY) && // ^ is a bitwise operator.
 		Entity->Collides(NewX + Col_X,NewY + Col_Y, Width - Col_Width - 1, Height - Col_Height - 1) == true)
 	{
 	    EntityCol EntityCol;

@@ -15,8 +15,6 @@ public:
 	static bool OnDraw(SDL_Surface* Surf_Dest, SDL_Surface* Surf_Src, int X, int Y);
 
 	static bool OnDraw(SDL_Surface* Surf_Dest, SDL_Surface* Surf_src, int X, int Y, int crop_X, int crop_Y, int W, int H);
-
-	static bool Transparent(SDL_Surface* Surf_Dest, int R, int G, int B);
 };
 
 #endif
