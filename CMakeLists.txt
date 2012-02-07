@@ -1,5 +1,7 @@
 project(gradius)
 
+cmake_minimum_required(VERSION 2.8)
+
 find_package(SDL REQUIRED)
 find_package(SDL_image REQUIRED)
 
@@ -33,8 +35,6 @@ set(SOURCES
 	./world/Level.cpp
 	./world/Tile.cpp
 	./world/Zone.cpp
-	
-	./gfx/option.png
 )
 
 add_executable(gradius ${SOURCES})
