@@ -28,6 +28,7 @@ set(SOURCES
 	./game/EntityCol.cpp
 	./game/Player.cpp
 	./game/Bullet.cpp
+	./game/Enemy.cpp
 	./game/Powerup.cpp
 	
 	./settings/Settings.cpp

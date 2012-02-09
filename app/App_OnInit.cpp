@@ -50,6 +50,18 @@ bool App::OnInit()
 	    std::cout << "Player 1 init failed" << std::endl;
 	    return false;
     }
+
+/*
+ * TEST: Enemy
+ */
+    Enemy* nme = new Enemy();
+    if(nme->OnLoad("./gfx/option.png",47,27,5) == false)
+    {
+	std::cout << "Enemy init failure." << std::endl;
+	return false;
+    }
+    nme->ForcePos(100,300);
+    nme->MoveDown = true;
     
 /*
  * All initializtion was successful.

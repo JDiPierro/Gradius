@@ -25,7 +25,7 @@ void App::OnLoop()
 	if(!Entity::EntityList[i])
 	    continue;
 	//Handle dead entities before the living get their spotlight.
-	if(Entity::EntityList[i]->Dead == true)
+	if(Entity::EntityList[i]->isDead() == true)
 	{
 	    //Let the entity have some final words..
 	    Entity::EntityList[i]->OnDeath();

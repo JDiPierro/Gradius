@@ -62,9 +62,10 @@ protected:
 
 public:
 	int Type;
-
-	bool Dead;
 	int Flags;
+	
+protected:
+	bool Dead;
 
 protected:
 	float SpeedX;
@@ -112,7 +113,13 @@ public:
 	
 public:
 	virtual void OnFire();
-
+	
+public:
+	bool isDead();
+	
+	virtual void ForcePos(int fX, int fY);
+	virtual void ForcePos(int fY, char dim);
+	
 public:
 	bool Collides(int oX, int oY, int oW, int oH);
 
