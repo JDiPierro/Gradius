@@ -28,10 +28,10 @@ int Settings::GetTileSize()
 
 int Settings::GetMapWidth()
 {
-	return WWIDTH;
+	return MAP_WIDTH;
 }
 
 int Settings::GetMapHeight()
 {
-	return WHEIGHT;
+	return MAP_HEIGHT;
 }

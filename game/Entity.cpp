@@ -17,10 +17,10 @@ Entity::Entity()
 
     MoveLeft 	= false;
     MoveRight	= false;
-    MoveUp		= false;
+    MoveUp	= false;
     MoveDown	= false;
     
-    Firing		= false;
+    Firing	= false;
     numBullets	= 0;
     lastFireTime	= 0;
 

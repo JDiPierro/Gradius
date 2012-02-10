@@ -55,13 +55,12 @@ bool App::OnInit()
  * TEST: Enemy
  */
     Enemy* nme = new Enemy();
-    if(nme->OnLoad("./gfx/option.png",47,27,5) == false)
+    if(nme->OnLoad("./gfx/option.png",47,27,5) == false) //Pushed back to the EntityList in OnLoad
     {
 	std::cout << "Enemy init failure." << std::endl;
 	return false;
     }
-    nme->ForcePos(100,300);
-    nme->MoveDown = true;
+    nme->ForcePos(300,450);
     
 /*
  * All initializtion was successful.
