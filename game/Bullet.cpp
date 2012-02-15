@@ -36,7 +36,7 @@ bool Bullet::OnLoad(Entity* inParent, int Width, int Height, int MaxFrames, int 
     this->X = X;
     this->Y = Y;
     
-    Speed = 100;
+    Speed = 20;
     
     Entity::EntityList.push_back(this);
     

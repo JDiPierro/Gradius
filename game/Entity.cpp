@@ -31,7 +31,7 @@ Entity::Entity()
     Flags = ENTITY_FLAG_NONE;
 
     SpeedHack = 1;
-    Speed = 15;
+    Speed = 5;
     SpeedX = 0;
     SpeedY = 0;
 
@@ -100,21 +100,21 @@ void Entity::ForcePos(int fP,char dim)
 void Entity::OnLoop()
 {
     //We're not moving so make sure to stop.
-    if(MoveLeft == false && MoveRight == false && MoveUp == false && MoveDown == false)
+    /*if(MoveLeft == false && MoveRight == false && MoveUp == false && MoveDown == false)
     {
 	    StopMove();
-    }
+    }*/
 
     //Speed control.
     //TODO: Implement variables for speed upgrades.
     if(MoveLeft)
-	SpeedX = -Speed*SpeedHack;
+	SpeedX = -Speed;
     else if(MoveRight)
-	SpeedX =  Speed*SpeedHack;
+	SpeedX =  Speed;
     if(MoveUp)
-	SpeedY = -Speed*SpeedHack;
+	SpeedY = -Speed;
     else if(MoveDown)
-	SpeedY =  Speed*SpeedHack;
+	SpeedY =  Speed;
     if(Firing)
 	OnFire();
     
@@ -179,7 +179,7 @@ void Entity::OnMove(float MoveX, float MoveY)
 
     MoveX *= FPS::FPSControl.GetSpeedFactor();
     MoveY *= FPS::FPSControl.GetSpeedFactor();
-
+    
     if(Flags & ENTITY_FLAG_GHOST) // & is bitwise AND operator, so check to see if entity IS a ghost.
     {
 	PosValid((int)(X + MoveX), (int)(Y + MoveY));
@@ -192,12 +192,14 @@ void Entity::OnMove(float MoveX, float MoveY)
 	if(PosValid((int)(X + MoveX), (int)(Y)))
 	    X += MoveX;
 	else
-		SpeedX = 0;
+	    SpeedX = 0;
 	if(PosValid((int)(X), (int)(Y + MoveY)))
 	    Y += MoveY;
 	else
 	    SpeedY = 0;
     }
+    SpeedX = 0;
+    SpeedY = 0;
 }
 
 void Entity::StopMove()

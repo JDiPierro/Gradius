@@ -48,5 +48,4 @@ void App::OnLoop()
     char Buffer[255];
     sprintf(Buffer, "FPS: %d", FPS::FPSControl.GetFPS());
     SDL_WM_SetCaption(Buffer, Buffer);
-    SDL_Delay(1);
 }

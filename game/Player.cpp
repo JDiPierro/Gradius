@@ -18,7 +18,7 @@ bool Player::OnLoad(char* File, int Width, int Height, int MaxFrames)
 	return false;
     }
     Entity::EntityList.push_back(this);
-    Speed = 15; //base: 15 //1: 25 //2:40
+    Speed = 5; //base: 15 //1: 25 //2:40
     Type = ENTITY_TYPE_PLAYER;
     return true;
 }
@@ -35,7 +35,7 @@ void Player::OnFire()
 	    }
 	    lastFireTime = SDL_GetTicks();
 	    Bullet* bullet = new Bullet();
-	    bullet->OnLoad(this,4,4,0,X + Width + 1,Y + 12) == false;
+	    bullet->OnLoad(this,4,4,0,X + Width+1,Y + 12) == false;
 	}
     }
 }
