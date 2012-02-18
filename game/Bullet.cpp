@@ -36,7 +36,7 @@ bool Bullet::OnLoad(Entity* inParent, int Width, int Height, int MaxFrames, int 
     this->X = X;
     this->Y = Y;
     
-    Speed = 20;
+    Speed = 35;
     
     Entity::EntityList.push_back(this);
     
@@ -66,6 +66,8 @@ void Bullet::OnCleanup()
 
 bool Bullet::OnCollision(Entity* Entity)
 {    
+    if(Entity == parent) 
+	return false;
     Dead = true;    
     return true;
 }

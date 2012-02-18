@@ -198,8 +198,7 @@ void Entity::OnMove(float MoveX, float MoveY)
 	else
 	    SpeedY = 0;
     }
-    SpeedX = 0;
-    SpeedY = 0;
+    StopMove();
 }
 
 void Entity::StopMove()

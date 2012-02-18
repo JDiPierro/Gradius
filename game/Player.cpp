@@ -25,7 +25,7 @@ bool Player::OnLoad(char* File, int Width, int Height, int MaxFrames)
 
 void Player::OnFire()
 {
-    if(lastFireTime + 150 < SDL_GetTicks())
+    if(lastFireTime + 50 < SDL_GetTicks())
     {
 	if(numBullets < 2)
 	{
@@ -35,7 +35,7 @@ void Player::OnFire()
 	    }
 	    lastFireTime = SDL_GetTicks();
 	    Bullet* bullet = new Bullet();
-	    bullet->OnLoad(this,4,4,0,X + Width+1,Y + 12) == false;
+	    bullet->OnLoad(this,4,4,0,X + Width-25,Y + 13) == false;
 	}
     }
 }
