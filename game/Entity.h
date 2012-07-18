@@ -128,7 +128,8 @@ private:
 
 	bool PosValidTile(Tile* Tile);
 
-	bool PosValidEntity(Entity* Entity, int NewX, int NewY);
+protected:
+	virtual bool PosValidEntity(Entity* Entity, int NewX, int NewY);
 };
 
 class EntityCol

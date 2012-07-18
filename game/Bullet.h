@@ -24,6 +24,9 @@ public:
     
     bool OnCollision(Entity* Entity);
     
+private:
+    bool PosValidEntity(Entity* Entity, int NewX, int NewY);
+    
 };
 
 #endif

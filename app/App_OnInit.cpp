@@ -10,7 +10,7 @@ bool App::OnInit()
 	    std::cout << "Load Settings failed." << std::endl;
 	    return false;
     }
-/*
+/* 
  * SDL Initialization:
  */
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0)

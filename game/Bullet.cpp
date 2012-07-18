@@ -71,3 +71,12 @@ bool Bullet::OnCollision(Entity* Entity)
     Dead = true;    
     return true;
 }
+
+bool Bullet::PosValidEntity(Entity* Entity, int NewX, int NewY)
+{
+    if(Entity != parent)
+    {
+	return Entity::PosValidEntity(Entity, NewX, NewY);
+    }
+    else return true;
+}

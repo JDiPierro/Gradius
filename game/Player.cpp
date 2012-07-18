@@ -29,13 +29,17 @@ void Player::OnFire()
     {
 	if(numBullets < 2)
 	{
+	    //TODO: This was just for debugging, delete it at some point
 	    if(numBullets < 0)
 	    {
 		std::cout << "NumBullets less than 0" << std::endl;
 	    }
 	    lastFireTime = SDL_GetTicks();
 	    Bullet* bullet = new Bullet();
-	    bullet->OnLoad(this,4,4,0,X + Width-25,Y + 13) == false;
+	    if(SpeedX > 0)
+		bullet->OnLoad(this,4,4,0,X + SpeedX + Width - 20,Y + 12) == false;
+	    else 
+		bullet->OnLoad(this,4,4,0,X + Width - 20,Y + 12) == false;
 	}
     }
 }
@@ -131,7 +135,7 @@ bool Player::OnCollision(Entity* Entity)
 
 void Player::Upgrade_Speed()
 {
-    Speed = Speed + (speedLevel * 5) +5;
+    Speed = Speed + (speedLevel * 3);
     powerUps = PUP_NONE;
 }
 void Player::Upgrade_Gun()

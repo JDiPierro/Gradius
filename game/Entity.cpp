@@ -22,7 +22,7 @@ Entity::Entity()
     
     Firing	= false;
     numBullets	= 0;
-    lastFireTime	= 0;
+    lastFireTime= 0;
 
     Type = ENTITY_TYPE_GENERIC;
 
@@ -30,7 +30,6 @@ Entity::Entity()
 
     Flags = ENTITY_FLAG_NONE;
 
-    SpeedHack = 1;
     Speed = 5;
     SpeedX = 0;
     SpeedY = 0;
@@ -58,8 +57,6 @@ bool Entity::OnLoad(char* File, int Width, int Height, int MaxFrames)
 	return false;
     }
 
-    //Surface::Transparent(Surf_Entity, 255, 0, 255);
-
     this->Width = Width;
     this->Height = Height;
 
@@ -84,7 +81,7 @@ bool Entity::OnLoad(SDL_Surface* Surface, int Width, int Height, int MaxFrames)
 void Entity::ForcePos(int fX, int fY)
 {
     X = fX;
-    Y =fY;
+    Y = fY;
 }
 
 void Entity::ForcePos(int fP,char dim)
@@ -99,12 +96,6 @@ void Entity::ForcePos(int fP,char dim)
 
 void Entity::OnLoop()
 {
-    //We're not moving so make sure to stop.
-    /*if(MoveLeft == false && MoveRight == false && MoveUp == false && MoveDown == false)
-    {
-	    StopMove();
-    }*/
-
     //Speed control.
     //TODO: Implement variables for speed upgrades.
     if(MoveLeft)
@@ -224,7 +215,7 @@ void Entity::OnFire()
 
 void Entity::GetPowerup()
 {
-
+    //Pure virtual to be overridden by the Player class.
 }
 
 
@@ -328,11 +319,11 @@ bool Entity::PosValidTile(Tile* Tile)
 
 bool Entity::PosValidEntity(Entity* Entity, int NewX, int NewY)
 {
-bool Return = true;
+    bool Return = true;
     if(this != Entity &&
 	Entity != NULL &&
 	Entity->isDead() == false &&
-	(Entity->Flags ^ ENTITY_FLAG_MAPONLY) && // ^ is a bitwise operator.
+	(Entity->Flags ^ ENTITY_FLAG_MAPONLY) && // ^ is a bitwise operator.`
 	Entity->Collides(NewX + Col_X,NewY + Col_Y, Width - Col_Width - 1, Height - Col_Height - 1) == true)
     {
 	EntityCol EntityCol;
